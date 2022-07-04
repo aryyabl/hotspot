@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ArTech Hotspot | Logout</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;"/>
+<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script language="JavaScript">
+
+    function openLogin() {
+	if (window.name != 'hotspot_logout') return true;
+	open('$(link-login)', '_blank', '');
+	window.close();
+	return false;
+    }
+</script>
+<div class="main">
+<div class="box">
+<h3 class="brand">Anda Telah Logout</h3>
+<small>Terima kasih sudah berlangganan internet kami</small>
+</div>
+<table class="table2">
+$(if login-by == 'trial')
+	<tr><td align="right" style="width: 40%;">Username </td><td>Trial User</td></tr>
+$(elif login-by != 'mac')
+	<tr><td align="right" style="width: 40%;">Username </td><td><span id="user">$(username)</span></td></tr>
+$(endif)
+    <tr><td align="right">IP</td><td>$(ip)</td></tr>
+    <tr><td align="right">MAC</td><td>$(mac)</td></tr>
+    <tr><td align="right">Terkoneksi</td><td>$(uptime)</td></tr>
+    <tr><td align="right">Up / Down</td><td>$(bytes-in-nice) / $(bytes-out-nice)</td></tr>
+$(if remain-bytes-total)
+    <tr><td align="right">Sisa Kuota</td><td>$(remain-bytes-total-nice)</td></tr>
+$(endif)
+$(if session-time-left)
+    <tr><td align="right">Sisa Waktu</td><td>$(session-time-left)</td></tr>
+$(endif)
+</table>
+<br>
+<form action="$(link-login)" name="login" onSubmit="return openLogin()">
+<button class="button2 orange" type="submit">Login Kembali</button>
+</form>
+<div class="box" style="color:#fff;">
+<i>Copyright &copy; 2018 Laksamadi</i><br />
+<i>Powered by <a style="color:#fff; text-decoration:underline;" href="https://laksa19.github.io">Mikhmon</a></i>
+</div>
+</div>
+</body>
+</html>

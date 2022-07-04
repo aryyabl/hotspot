@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ArTech Hotspot | Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />
+	<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="main" class="main">
+<div class="box">
+<h3 class="brand">ArTech Hotspot</h3>
+<small>Internet Unlimited Tanpa Batas Kuota</small>
+</div>
+<div class="rainbow-line"></div>
+<div class="box">
+<button id="btnvrc" class="small-button orange" onclick="voucher();">Voucher</button>
+<button id="btnmem" class="small-button birumuda" onclick="member();">Member</button>
+</div>
+<div class="box" id="infologin">
+</div>
+<form name="login" id="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()"
+$(endif)>
+<input type="hidden" name="dst" value="$(link-orig)" />
+                <input type="hidden" name="popup" value="true" />
+                <input class="username" id="login" name="username" type="text" value="$(username)" autocomplete="off" required/>
+                <input class="password" name="password" placeholder="Password" autocomplete="off" type="hidden" />
+            <div class="box">
+			$(if trial == 'yes')
+                <button class="small-button hijau" href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">Gratis 5menit</button>
+			$(else)
+				<button class="small-button hijau disabled">Gratis Habis</button>
+			$(endif)
+                <button class="small-button hijau" type="submit">Login</button>
+			</div>
+            </form>
+            $(if error)<div class="notice">$(error)</div>$(endif)
+			<b>Untuk Pemasangan Rumahan Bisa Menghubungi Nomor : 083873557881</b>
+            <table class="table">
+                    <caption style="font-size: 16px; font-weight: bold;">===== PAKET HOTSPOT =====</caption>
+                    <tr>
+                        <th>Paket</th>
+                        <th>Aktif</th>
+                        <th>Harga</th>
+                    </tr>
+                    <tr>
+                        <td>6 Jam</td>
+                        <td>12 Jam</td>
+                        <td>Rp 2.000</td>
+                    </tr>
+                    <tr>
+                        <td>10 Jam</td>
+                        <td>10 Jam</td>
+                        <td>Rp 3.000</td>
+                    </tr>
+					<tr>
+                        <td>1 Hari</td>
+                        <td>1 Hari</td>
+                        <td>Rp 6.000</td>
+                    </tr>
+                    <tr>
+                        <td>3 Hari</td>
+                        <td>3 Hari</td>
+                        <td>Rp 7.000</td>
+                    </tr>
+					<tr>
+                        <td>7 Hari</td>
+                        <td>7 Hari</td>
+                        <td>Rp 15.000</td>
+                    </tr>
+					<tr>
+                        <td>15 Hari</td>
+                        <td>15 Hari</td>
+                        <td>Rp 30.000</td>
+                    </tr>
+                    <tr>
+                        <td>30 Hari</td>
+                        <td>30 Hari</td>
+                        <td>Rp 60.000</td>
+                    </tr>
+					<tr>
+                        <td>Paket Rumahan ( 4 Akun ) </td>
+                        <td>1 Bulan</td>
+                        <td>Rp 150.000</td>
+                    </tr>
+					<tr>
+                        <td>Paket Rumahan ( 5 Akun ) </td>
+                        <td>1 Bulan</td>
+                        <td>Rp 180.000</td>
+                    </tr>
+                </table>
+                <br />
+        <div class="box" style="color:#fff;">
+            <i>Copyright &copy; 2020 aryyabl</i><br />
+            <i>Powered by <a style="color:#fff; text-decoration:underline;" href="https://facebook.com/aryyabl">ArTech</a></i>
+        </div>
+        </div>
+        $(if chap-id)
+        <form name="sendin" action="$(link-login-only)" method="post">
+            <input type="hidden" name="username" />	
+            <input type="hidden" name="password" />
+            <input type="hidden" name="dst" value="$(link-orig)" />
+            <input type="hidden" name="popup" value="true" />
+        </form>
+
+        <script type="text/javascript" src="md5.js"></script>
+        <script type="text/javascript">
+            function doLogin() {
+                document.sendin.username.value = document.login.username.value;
+                document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value +
+                    '$(chap-challenge)');
+                document.sendin.submit();
+                return false;
+            }
+        </script>
+        $(endif)
+<script type="text/javascript">
+document.login.username.focus();
+var infologin = document.getElementById('infologin');
+infologin.innerHTML = "Masukkan Kode Voucher.";
+// login page 2 mode by aryyabl
+var username = document.login.username;
+var password = document.login.password;
+username.placeholder = "Kode Voucher";
+// set password = username
+function setpass() {
+    var user = username.value	
+    username.value = user;
+    password.value = user;
+}
+username.onkeyup = setpass;
+// change to voucher mode
+function voucher() {
+    username.focus();
+    username.onkeyup = setpass;
+    username.placeholder = "Kode Voucher";
+    password.type = "hidden";
+    infologin.innerHTML = "Masukkan Kode Voucher.";
+}
+// change to member mode
+function member() {
+    username.focus();
+    username.onkeyup = "";
+    username.placeholder = "Username";
+    password.type = "password";
+    infologin.innerHTML = "Masukkan Username dan Password.";
+}
+</script>
+
+</body>
+
+</html>
